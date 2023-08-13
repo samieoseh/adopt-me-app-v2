@@ -27,7 +27,8 @@ const SearchParams = ({ accessToken }) => {
             url: `${fetchAnimalsUrl}?type=${selectedOption}&limit=100`,
         });
     };
-    console.log(animalParams);
+    console.log("Gello");
+    console.log("Hello");
     return (
         <div>
             <form
