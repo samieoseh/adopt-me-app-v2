@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchAnimalsUrl, fetchTypeUrl } from "../config";
+import { fetchAnimalsUrl, fetchTypeUrl } from "../../config";
 import fetchApi from "../utils/fetchApi";
 import { useQuery } from "@tanstack/react-query";
 
