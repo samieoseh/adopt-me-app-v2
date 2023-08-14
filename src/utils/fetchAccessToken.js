@@ -1,5 +1,5 @@
-import auth from "../config";
-import { fetchAccessTokenUrl } from "../config";
+import auth from "../../config";
+import { fetchAccessTokenUrl } from "./urls";
 
 const fetchAccessToken = async () => {
     const url = fetchAccessTokenUrl;

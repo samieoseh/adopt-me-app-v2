@@ -1,25 +1,39 @@
-import { useState } from "react";
-import { fetchAnimalsUrl, fetchTypeUrl } from "../../config";
+import { useState, useEffect } from "react";
+import { fetchAnimalsUrl, fetchTypesUrl } from "../utils/urls";
+import noPetImage from "../assets/images/no-pet.jpg";
 import fetchApi from "../utils/fetchApi";
 import { useQuery } from "@tanstack/react-query";
 
 // eslint-disable-next-line react/prop-types
-const SearchParams = ({ accessToken }) => {
+const SearchResult = ({ accessToken }) => {
+    console.log(accessToken);
     const [selectedOption, setSelectedOption] = useState("");
 
     const [animalParams, setAnimalParams] = useState({
-        token: accessToken,
-        url: `${fetchAnimalsUrl}?limit=100`,
+        token: null,
+        url: null,
     });
-    const animalRes = useQuery(["params", animalParams], fetchApi);
-    const typeRes = useQuery(
-        ["params", { token: accessToken, url: fetchTypeUrl }],
-        fetchApi
-    );
+    const [typeParams, setTypeParams] = useState({
+        token: null,
+        url: null,
+    });
+
+    useEffect(() => {
+        setAnimalParams({
+            token: accessToken,
+            url: `${fetchAnimalsUrl}?limit=100`,
+        });
+        setTypeParams({
+            token: accessToken,
+            url: fetchTypesUrl,
+        });
+    }, [accessToken]);
+
+    const animalRes = useQuery(["animal-params", animalParams], fetchApi);
+    const typeRes = useQuery(["type-params", typeParams], fetchApi);
     const [animals] = [animalRes?.data?.animals ?? [], animalRes.status];
     const [types] = [typeRes?.data?.types ?? [], typeRes.status];
     // const [pagination] = [results?.data?.pagination ?? [], results.status];
-    console.log(animals);
 
     const handleSubmit = () => {
         setAnimalParams({
@@ -27,8 +41,7 @@ const SearchParams = ({ accessToken }) => {
             url: `${fetchAnimalsUrl}?type=${selectedOption}&limit=100`,
         });
     };
-    console.log("Gello");
-    console.log("Hello");
+
     return (
         <div>
             <form
@@ -46,7 +59,9 @@ const SearchParams = ({ accessToken }) => {
                         name="type"
                         id="type"
                         value={selectedOption}
-                        onChange={(e) => setSelectedOption(e.target.value)}
+                        onChange={(e) => {
+                            setSelectedOption(e.target.value);
+                        }}
                     >
                         <option key="blank"></option>
                         {types &&
@@ -57,14 +72,19 @@ const SearchParams = ({ accessToken }) => {
                 </label>
                 <input type="submit" value="Submit" />
             </form>
-            <div>
+            <div className="container">
                 {animals &&
                     animals.map((animal) => (
-                        <div key={animal.id}>
-                            <h1>{animal.name}</h1>
-                            <div>
+                        <div key={animal.id} className="card">
+                            <h1 className="card-title">{animal.name}</h1>
+                            <div className="card-img-container">
                                 <img
-                                    src={animal["primary_photo_cropped"]?.small}
+                                    src={
+                                        animal["primary_photo_cropped"]
+                                            ? animal["primary_photo_cropped"]
+                                                  .small
+                                            : noPetImage
+                                    }
                                     alt={animal.name}
                                 />
                             </div>
@@ -75,4 +95,4 @@ const SearchParams = ({ accessToken }) => {
     );
 };
 
-export default SearchParams;
+export default SearchResult;

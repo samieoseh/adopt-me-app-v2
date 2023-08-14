@@ -4,6 +4,7 @@ const fetchApi = async ({ queryKey }) => {
 
     if (accessToken != null) {
         const auth = `${accessToken["token_type"]} ${accessToken["access_token"]}`;
+        console.log("fetching ", fetchUrl);
         try {
             const res = await fetch(fetchUrl, {
                 headers: {
