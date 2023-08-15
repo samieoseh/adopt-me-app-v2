@@ -5,7 +5,7 @@ import fetchApi from "../utils/fetchApi";
 import { useQuery } from "@tanstack/react-query";
 
 // eslint-disable-next-line react/prop-types
-const SearchResult = ({ accessToken }) => {
+const SearchParams = ({ accessToken }) => {
     console.log(accessToken);
     const [selectedOption, setSelectedOption] = useState("");
 
@@ -95,4 +95,4 @@ const SearchResult = ({ accessToken }) => {
     );
 };
 
-export default SearchResult;
+export default SearchParams;
