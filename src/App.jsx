@@ -4,13 +4,9 @@ import { useEffect, useState } from "react";
 import fetchAccessToken from "./utils/fetchAccessToken";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
-<<<<<<< HEAD
-import Header from "./components/Header";
-import SearchResult from "./components/SearchParams";
-=======
 import { FilterProvider } from "./components/FilterContext";
 import Header from "./components/Header";
->>>>>>> 334559e75737b1c9e8ee508bb2a31c977e5fe4ba
+import Details from "./components/Details";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -42,6 +38,11 @@ function App() {
                             exact
                             path="/"
                             element={<Search accessToken={accessToken} />}
+                        />
+                        <Route
+                            exact
+                            path="/details/:id"
+                            element={<Details accessToken={accessToken} />}
                         />
                     </Routes>
                 </FilterProvider>

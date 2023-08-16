@@ -5,7 +5,7 @@ import fetchApi from "../utils/fetchApi";
 import { useQuery } from "@tanstack/react-query";
 import ReactLoading from "react-loading";
 import { useFilterContext } from "./FilterContext";
-
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/Search.module.css";
 import searchIcon from "../assets/svg/search.svg";
 
@@ -13,6 +13,7 @@ import searchIcon from "../assets/svg/search.svg";
 const Search = ({ accessToken }) => {
     const [selectedOption, setSelectedOption] = useState("");
     const [location, setLocation] = useState("");
+    const navigate = useNavigate();
 
     const [animalParams, setAnimalParams] = useState({
         token: null,
@@ -110,7 +111,15 @@ const Search = ({ accessToken }) => {
                     <div className={styles.container}>
                         {animals &&
                             animals.map((animal) => (
-                                <div key={animal.id} className={styles.card}>
+                                <div
+                                    key={animal.id}
+                                    className={styles.card}
+                                    onClick={() =>
+                                        navigate(`/details/${animal.id}`, {
+                                            state: { id: animal.id },
+                                        })
+                                    }
+                                >
                                     <h3 className={styles.cardTitle}>
                                         {animal.name}
                                     </h3>
