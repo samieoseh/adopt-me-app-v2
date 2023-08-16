@@ -1,18 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    --primary-color: #10a810;
+    --secondary-color: #868686;
+    --tertiary-color: #1d0101;
+    --dark: #111;
+    --light: #fff;
+    --fontsize-xl-100: 1rem;
+    --fontsize-xl-200: 1.2rem;
+    --fontsize-xl-300: 1.4rem;
+    --text-color: #000;
 }
 
 body {
     background-color: #81a69b;
     background-image: url(http://pets-images.dev-apis.com/pets/wallpaperC.jpg);
     margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
 }
 
 /* src/index.css */
