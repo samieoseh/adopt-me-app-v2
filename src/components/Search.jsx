@@ -4,6 +4,7 @@ import noPetImage from "../assets/images/no-pet.jpg";
 import fetchApi from "../utils/fetchApi";
 import { useQuery } from "@tanstack/react-query";
 import ReactLoading from "react-loading";
+import { useFilterContext } from "./FilterContext";
 
 import styles from "./styles/Search.module.css";
 import searchIcon from "../assets/svg/search.svg";
@@ -52,7 +53,8 @@ const Search = ({ accessToken }) => {
     const typeRes = useQuery(["type-params", typeParams], fetchApi);
     const [animals] = [animalRes?.data?.animals ?? [], animalRes.status];
     const [types] = [typeRes?.data?.types ?? [], typeRes.status];
-    console.log(animalRes);
+    const { selectedFilter } = useFilterContext();
+    console.log(selectedFilter);
     return (
         <div
             style={{

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import fetchAccessToken from "./utils/fetchAccessToken";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
+import { FilterProvider } from "./components/FilterContext";
 import Header from "./components/Header";
 
 const queryClient = new QueryClient({
@@ -27,30 +28,18 @@ function App() {
     }, []);
 
     return (
-        // <QueryClientProvider client={queryClient}>
-        //     <BrowserRouter>
-        //         <Routes>
-        //             <Route
-        //                 exact
-        //                 path="/"
-        //                 element={<SearchParams accessToken={accessToken} />}
-        //             />
-        //         </Routes>
-        //     </BrowserRouter>
-        // </QueryClientProvider>
         <QueryClientProvider client={queryClient}>
             <BrowserRouter>
-                <Header />
-                <Routes>
-                    <Route
-                        exact
-                        path="/"
-                        element={<Search accessToken={accessToken} />}
-                    />
-                </Routes>
-                {/* <Routes>
-                <Route exact path="/results" element={<SearchParams />} />
-            </Routes> */}
+                <FilterProvider>
+                    <Header />
+                    <Routes>
+                        <Route
+                            exact
+                            path="/"
+                            element={<Search accessToken={accessToken} />}
+                        />
+                    </Routes>
+                </FilterProvider>
             </BrowserRouter>
         </QueryClientProvider>
     );
