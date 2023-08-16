@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import fetchAccessToken from "./utils/fetchAccessToken";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
+import Header from "./components/Header";
 import SearchResult from "./components/SearchParams";
 
 const queryClient = new QueryClient({
