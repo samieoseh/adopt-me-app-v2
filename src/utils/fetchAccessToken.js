@@ -20,7 +20,7 @@ const fetchAccessToken = async () => {
         body: new URLSearchParams(data),
     };
     const apiRes = await fetch(url, requestOptions);
-    console.log(apiRes.status);
+
     if (!apiRes.ok) {
         throw new Error(`Error in access token`);
     }

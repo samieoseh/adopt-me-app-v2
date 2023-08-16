@@ -72,12 +72,12 @@ const SearchParams = ({ accessToken }) => {
                 </label>
                 <input type="submit" value="Submit" />
             </form>
-            <div className="container">
+            <div>
                 {animals &&
                     animals.map((animal) => (
-                        <div key={animal.id} className="card">
-                            <h1 className="card-title">{animal.name}</h1>
-                            <div className="card-img-container">
+                        <div key={animal.id}>
+                            <h1>{animal.name}</h1>
+                            <div>
                                 <img
                                     src={
                                         animal["primary_photo_cropped"]

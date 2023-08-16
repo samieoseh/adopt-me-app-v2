@@ -1,4 +1,4 @@
-import SearchParams from "./components/SearchParams";
+import Search from "./components/Search";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchAccessToken from "./utils/fetchAccessToken";
@@ -38,12 +38,21 @@ function App() {
         //         </Routes>
         //     </BrowserRouter>
         // </QueryClientProvider>
-        <BrowserRouter>
-            <Header />
-            <Routes>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route
+                        exact
+                        path="/"
+                        element={<Search accessToken={accessToken} />}
+                    />
+                </Routes>
+                {/* <Routes>
                 <Route exact path="/results" element={<SearchParams />} />
-            </Routes>
-        </BrowserRouter>
+            </Routes> */}
+            </BrowserRouter>
+        </QueryClientProvider>
     );
 }
 
