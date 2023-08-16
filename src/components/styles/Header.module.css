@@ -1,0 +1,23 @@
+header {
+    display: flex;
+    border: 1px solid brown;
+    max-width: 100%;
+    height: 4rem;
+    justify-content: space-between;
+}
+
+header nav {
+    display: flex;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul div {
+    height: 2rem;
+    width: 2rem;
+}
+
+header nav ul div > img {
+}
