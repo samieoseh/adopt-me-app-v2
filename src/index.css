@@ -18,6 +18,7 @@ body {
     background-image: url(http://pets-images.dev-apis.com/pets/wallpaperC.jpg);
     margin: 0;
     font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
 }
 
 /* src/index.css */

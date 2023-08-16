@@ -1,5 +1,6 @@
 import styles from "./styles/Header.module.css";
 import favIcon from "../assets/svg/favorite.svg";
+import closeIcon from "../assets/svg/close.svg";
 import filterIcon from "../assets/svg/filter.svg";
 import { useFilterContext } from "../components/FilterContext";
 import { useState } from "react";
@@ -8,6 +9,7 @@ import { fetchAnimalsUrl } from "../utils/urls";
 const Header = () => {
     const { selectedFilter, setSelectedFilter } = useFilterContext();
     const [filterItem, setFilterItem] = useState({});
+    const [filterBarStatus, setFilterBarStatus] = useState(false);
 
     const handleChange = (name, value) => {
         const updatedItem = {
@@ -51,35 +53,30 @@ const Header = () => {
                         </div>
                         <div
                             className={styles.filter}
-                            onClick={() => handleFilterChange()}
+                            onClick={() => setFilterBarStatus(true)}
                         >
                             <img src={filterIcon} alt="favorite" />
                         </div>
                     </div>
-                    <div className={styles.filterBar}>
-                        <select
-                            name="breed"
-                            id=""
-                            onChange={(e) =>
-                                handleChange("gender", e.target.value)
-                            }
+                    <div
+                        className={`${styles.filterBar} ${
+                            filterBarStatus ? styles.filterBarActive : ""
+                        }`}
+                    >
+                        <div
+                            style={{
+                                display: "flex",
+                                width: "100%",
+                                justifyContent: "flex-end",
+                            }}
                         >
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                        <select
-                            name="gender"
-                            id=""
-                            onChange={(e) =>
-                                handleChange("title", e.target.value)
-                            }
-                        >
-                            <option value="mr">Mr</option>
-                            <option value="mrs">Mrs</option>
-                        </select>
-                        <button onClick={() => handleFilterSubmit()}>
-                            Submit
-                        </button>
+                            <div
+                                className={styles.closeIcon}
+                                onClick={() => setFilterBarStatus(false)}
+                            >
+                                <img src={closeIcon} alt="close icon" />
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>
